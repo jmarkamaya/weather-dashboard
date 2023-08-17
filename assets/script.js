@@ -41,8 +41,6 @@ button.addEventListener("click", function (event) {
 
     city = userInput.value.trim();
 
-    console.log("city: " + city);
-
 
 
     var geoCodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
@@ -98,13 +96,11 @@ button.addEventListener("click", function (event) {
                     return response.json();
                 })
                 .then(function (data) {
-                    console.log(data);
 
                     // DAY ONE 
                     // DATE
                     var dayOne = data.list[0];
-                    var dayOneDate = dayjs(dayOne.dt_txt).format('MMM DD, YYYY');
-                    console.log(dayOneDate);
+                    var dayOneDate = dayjs(dayOne.dt_txt).format('MMM DD, YYYY')
                     dayOneEl.textContent = dayOneDate;
                     //   ICON   
                     var iconOne = dayOne.weather[0].icon
@@ -130,7 +126,6 @@ button.addEventListener("click", function (event) {
                     // DATE
                     var dayTwo = data.list[8];
                     var dayTwoDate = dayjs(dayTwo.dt_txt).format('MMM DD, YYYY');
-                    console.log(dayTwoDate);
                     dayTwoEl.textContent = dayTwoDate;
                     //   ICON   
                     var iconTwo = dayTwo.weather[0].icon
@@ -153,7 +148,6 @@ button.addEventListener("click", function (event) {
                     // DATE
                     var dayThree = data.list[16];
                     var dayThreeDate = dayjs(dayThree.dt_txt).format('MMM DD, YYYY');
-                    console.log(dayThreeDate);
                     dayThreeEl.textContent = dayThreeDate;
                     //   ICON   
                     var iconThree = dayThree.weather[0].icon
@@ -178,7 +172,6 @@ button.addEventListener("click", function (event) {
                     // DATE
                     var dayFour = data.list[24];
                     var dayFourDate = dayjs(dayFour.dt_txt).format('MMM DD, YYYY');
-                    console.log(dayFourDate);
                     dayFourEl.textContent = dayFourDate;
                     //   ICON   
                     var iconFour = dayOne.weather[0].icon
@@ -202,7 +195,6 @@ button.addEventListener("click", function (event) {
                     // DATE
                     var dayFive = data.list[32];
                     var dayFiveDate = dayjs(dayFive.dt_txt).format('MMM DD, YYYY');
-                    console.log(dayFiveDate);
                     dayFiveEl.textContent = dayFiveDate;
                     //   ICON   
                     var iconFive = dayFive.weather[0].icon
@@ -220,7 +212,8 @@ button.addEventListener("click", function (event) {
                 });
 
             storeSearches();
-            showSearches();
+            // showSearches();
+            
 
 
 
@@ -230,13 +223,34 @@ button.addEventListener("click", function (event) {
 });
 
 function storeSearches() {
-    var inputField = userInput.value.trim();;
+
+    var inputField = userInput.value.trim();
     console.log(inputField);
-    // var enteredValue = inputField.value;
-    // var scoreObject = inputField;
-    recentSearches.push(inputField);
-    localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+    var storedSearches = JSON.parse(localStorage.getItem("recentSearches"));
+    
+
+    if (!storedSearches) {
+        console.log("empty");
+        recentSearches.push(inputField);
+        localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+    }
+
+    else if (storedSearches.indexOf(inputField) !== -1)  
+{  
+        console.log("Yes, the value exists!")  
+        return
+}   
+else  
+{  
+       console.log("No, the value is absent.");
+       recentSearches.push(inputField);
+        localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+
+}  
+
 };
+
+
 
 // how to only show new cities? window.location.reload();?
 function showSearches() {
@@ -246,7 +260,8 @@ function showSearches() {
     if (!storedSearches) { 
         return;
     }
-    else {
+    else { 
+    
 
     for (var i = 0; i < storedSearches.length; i++) {      // how to get the last 5? if i just do if i < 5 it will always show the same first 5 scores unless i refresh local storage.
 
@@ -333,7 +348,7 @@ historyButton.addEventListener('click', function(event) {
                         // DATE
                         var dayOne = data.list[0];
                         var dayOneDate = dayjs(dayOne.dt_txt).format('MMM DD, YYYY');
-                        console.log(dayOneDate);
+        
                         dayOneEl.textContent = dayOneDate;
                         //   ICON   
                         var iconOne = dayOne.weather[0].icon
@@ -359,7 +374,7 @@ historyButton.addEventListener('click', function(event) {
                         // DATE
                         var dayTwo = data.list[8];
                         var dayTwoDate = dayjs(dayTwo.dt_txt).format('MMM DD, YYYY');
-                        console.log(dayTwoDate);
+                        
                         dayTwoEl.textContent = dayTwoDate;
                         //   ICON   
                         var iconTwo = dayTwo.weather[0].icon
@@ -382,7 +397,7 @@ historyButton.addEventListener('click', function(event) {
                         // DATE
                         var dayThree = data.list[16];
                         var dayThreeDate = dayjs(dayThree.dt_txt).format('MMM DD, YYYY');
-                        console.log(dayThreeDate);
+                        
                         dayThreeEl.textContent = dayThreeDate;
                         //   ICON   
                         var iconThree = dayThree.weather[0].icon
@@ -407,7 +422,7 @@ historyButton.addEventListener('click', function(event) {
                         // DATE
                         var dayFour = data.list[24];
                         var dayFourDate = dayjs(dayFour.dt_txt).format('MMM DD, YYYY');
-                        console.log(dayFourDate);
+                    
                         dayFourEl.textContent = dayFourDate;
                         //   ICON   
                         var iconFour = dayOne.weather[0].icon
@@ -431,7 +446,7 @@ historyButton.addEventListener('click', function(event) {
                         // DATE
                         var dayFive = data.list[32];
                         var dayFiveDate = dayjs(dayFive.dt_txt).format('MMM DD, YYYY');
-                        console.log(dayFiveDate);
+                
                         dayFiveEl.textContent = dayFiveDate;
                         //   ICON   
                         var iconFive = dayFive.weather[0].icon
@@ -455,9 +470,3 @@ historyButton.addEventListener('click', function(event) {
 
   
 });
-
-
-
-
-
-
