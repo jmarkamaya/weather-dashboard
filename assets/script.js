@@ -43,7 +43,7 @@ button.addEventListener("click", function (event) {
 
 
 
-    var geoCodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
+    var geoCodingUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;  //was http
 
     fetch(geoCodingUrl)
         .then(function (response) {
@@ -86,7 +86,7 @@ button.addEventListener("click", function (event) {
 
                 });
 
-            var fiveDayURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+            var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; //was http
             fetch(fiveDayURL)
                 .then(function (response) {
                     if (!response.ok) {
