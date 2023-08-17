@@ -243,6 +243,11 @@ function showSearches() {
 
     var storedSearches = JSON.parse(localStorage.getItem("recentSearches"));
 
+    if (!storedSearches) { 
+        return;
+    }
+    else {
+
     for (var i = 0; i < storedSearches.length; i++) {      // how to get the last 5? if i just do if i < 5 it will always show the same first 5 scores unless i refresh local storage.
 
 
@@ -253,6 +258,7 @@ function showSearches() {
         buttonEl.setAttribute("class", "btn-secondary")
         historyButton.appendChild(buttonEl);
     };
+}
 };
 
 
