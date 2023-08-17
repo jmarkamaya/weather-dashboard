@@ -225,24 +225,23 @@ button.addEventListener("click", function (event) {
 function storeSearches() {
 
     var inputField = userInput.value.trim();
-    console.log(inputField);
     var storedSearches = JSON.parse(localStorage.getItem("recentSearches"));
     
 
     if (!storedSearches) {
-        console.log("empty");
+        
         recentSearches.push(inputField);
         localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
     }
 
     else if (storedSearches.indexOf(inputField) !== -1)  
 {  
-        console.log("Yes, the value exists!")  
+        
         return
 }   
 else  
 {  
-       console.log("No, the value is absent.");
+       
        recentSearches.push(inputField);
         localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
 
@@ -282,7 +281,7 @@ function showSearches() {
 
 historyButton.addEventListener('click', function(event) {
   if (event.target.classList.contains('btn-secondary')) {
-    console.log(event.target.textContent);
+    
 
     cityBtn = event.target.textContent;
 
