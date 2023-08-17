@@ -212,7 +212,7 @@ button.addEventListener("click", function (event) {
                 });
 
             storeSearches();
-            // showSearches();
+            
             
 
 
@@ -286,10 +286,10 @@ historyButton.addEventListener('click', function(event) {
 
     cityBtn = event.target.textContent;
 
-        console.log("cityBtn" + cityBtn);
+        
 
 
-        var geoCodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityBtn + "&appid=" + APIKey;
+        var geoCodingUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityBtn + "&appid=" + APIKey; //was http
 
         fetch(geoCodingUrl)
             .then(function (response) {
@@ -332,7 +332,7 @@ historyButton.addEventListener('click', function(event) {
 
                     });
 
-                var fiveDayURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+                var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; //was http
                 fetch(fiveDayURL)
                     .then(function (response) {
                         if (!response.ok) {
@@ -342,7 +342,7 @@ historyButton.addEventListener('click', function(event) {
                         return response.json();
                     })
                     .then(function (data) {
-                        console.log(data);
+                        
 
                         // DAY ONE 
                         // DATE
